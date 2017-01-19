@@ -7,7 +7,7 @@ Authors: Joel Burton, Christian Fernandez, Meggie Mahnken, Katie Byers.
 """
 
 
-from flask import Flask, render_template, redirect, flash
+from flask import Flask, render_template, redirect, flash, session
 import jinja2
 
 import melons
@@ -50,7 +50,7 @@ def show_melon(melon_id):
     Show all info about a melon. Also, provide a button to buy that melon.
     """
 
-    melon = melons.get_by_id("meli")
+    melon = melons.get_by_id(melon_id)
     print melon
     return render_template("melon_details.html",
                            display_melon=melon)
@@ -88,6 +88,22 @@ def add_to_cart(melon_id):
     When a melon is added to the cart, redirect browser to the shopping cart
     page and display a confirmation message: 'Melon successfully added to
     cart'."""
+
+    if "cart" in session:
+        # do some appending
+        if melon_id in session["cart"][melon_id]:
+            print "bamboo"
+        print session
+
+        # To do: Take in melon_id
+        # see line 112
+    else:
+        session["cart"] = {}
+    #     # do some appending
+        print session["cart"]
+
+
+    # session['fav_number'] = 42
 
     # TODO: Finish shopping cart functionality
 
