@@ -89,18 +89,39 @@ def add_to_cart(melon_id):
     page and display a confirmation message: 'Melon successfully added to
     cart'."""
 
-    if "cart" in session:
-        # do some appending
-        if melon_id in session["cart"][melon_id]:
-            print "bamboo"
-        print session
+    cart_dict = session["cart"]
 
-        # To do: Take in melon_id
-        # see line 112
+    print "cart dict: ", cart_dict
+
+    if melon_id in cart_dict:
+        print "melon id: ", melon_id
+        cart_dict[melon_id] = cart_dict[melon_id] + 1
+        print "cart dict melon id", cart_dict[melon_id]
+
     else:
-        session["cart"] = {}
+        print "melon id not in dict: "
+        cart_dict[melon_id] = 1
+        print "adding id to dict: ", cart_dict[melon_id]
+    print "entire cart dict: ", cart_dict
+    flash("Melon added!")
+
+
+
+    # if "cart" in session:
+    #     print session
     #     # do some appending
-        print session["cart"]
+    #     if melon_id in session["cart"][melon_id]:
+    #         session["cart"][melon_id] += 1
+    #         # session["cart"][melon_id] = session.get(melon_id, 0) + 1
+    #     elif melon_id not in session["cart"][melon_id]:
+    #         session["cart"][melon_id] = 1
+    #     # To do: Take in melon_id
+    #     # see line 112
+    # else:
+    #     session["cart"] = {}
+    #     # add melon
+    # #     # do some appending
+    #     print session["cart"]
 
 
     # session['fav_number'] = 42
